@@ -1,0 +1,19 @@
+
+@model Blog_Web.ViewModels.RegisterViewModel
+
+
+<h2>Kayıt Ol</h2>
+<form asp-action="Register" method="post">
+    <input asp-for="Username" class="form-control" placeholder="Kullanıcı Adı" />
+    <span asp-validation-for="Username" class="text-danger"></span>
+
+    <input asp-for="Password" class="form-control mt-2" placeholder="Şifre" type="password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+        
+
+    <button type="submit" class="btn btn-success mt-3">Kayıt Ol</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

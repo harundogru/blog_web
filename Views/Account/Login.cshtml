@@ -1,0 +1,23 @@
+@model Blog_Web.ViewModels.LoginViewModel
+
+<h2>Giriş Yap</h2>
+<form asp-action="Login" method="post">
+    <input asp-for="Username" class="form-control" placeholder="Kullanıcı Adı" />
+    <span asp-validation-for="Username" class="text-danger"></span>
+
+    <input asp-for="Password" class="form-control mt-2" placeholder="Şifre" type="password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-primary mt-3">Giriş Yap</button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary(false)
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

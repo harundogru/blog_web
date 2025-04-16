@@ -1,0 +1,47 @@
+@model List<Blog_Web.Models.Blog>
+<form method="get" asp-action="Index" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="categoryId" class="form-select" onchange="this.form.submit()">
+                <option value="">Tüm Kategoriler</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.Id" selected="@(category.Id == ViewBag.SelectedCategory ? "selected" : null)">
+                        @category.Name
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</form>
+<h2>Blog Listesi</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-success">+ Yeni Blog Yaz</a>
+    </div>
+}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Başlık</th>
+        <th>Kategori</th>
+        <th>Yazar</th>
+        <th>Tarih</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var blog in Model)
+    {
+        <tr>
+            <td>@blog.Title</td>
+            <td>@blog.Category?.Name</td>
+            <td>@blog.User?.UserName</td>
+            <td>@blog.PublishedDate.ToShortDateString()</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@blog.Id" class="btn btn-info btn-sm">İncele</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
